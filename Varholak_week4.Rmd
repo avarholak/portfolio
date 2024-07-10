@@ -1,0 +1,92 @@
+---
+title: "Varholak_week4"
+output: html_document
+date: "2024-06-23"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Tomato Data Wrangling
+
+1A. Loading the dplyr package and reading in the three files, checking the structure of each.
+```{r loading_data, message = FALSE}
+#install.packages('dplyr')
+library (dplyr)
+#read in the files and check their structures.
+tomato_main <- read.csv('tomato.csv')
+treatment <- read.csv('tomato_treatment.csv')
+issues <- read.csv('tomato_issues.csv')
+str(tomato_main)
+str(treatment)
+str(issues)
+```
+1B. Attach the treatment info to tomato_main using a join by plant where no rows are lost. 
+
+```{r joining_treatment}
+#joining the treatment to the main data set and checking the structure. 
+tomato_v1 <- full_join(x=tomato_main, y=treatment,
+                       by= 'plant')
+str(tomato_v1)
+```
+
+1C. Remove plants if they had herbivore damage or fungal infection 
+```{r remove_damage}
+#joining the new object with main data and treatment to the issues file.
+tomato_v2 <- full_join(x=tomato_v1, y=issues, 
+                       by = 'plant')
+#Filtering so that the new object only shows tomatoes where the problem is none or over watered, removing any row whose problem is fungal infection or herbivore damage.
+tomato_v3 <- dplyr::filter(.data=tomato_v2, problem == 'none' | problem == 'over watered')
+#checking the structure of the filtered data set. 
+str(tomato_v3)
+```
+
+
+## Penguin Data Statistics
+
+2A. Load palmerpenguins and check the structure of penguins data.
+
+```{r load_structure}
+#install.packages('palmerpenguins')
+#loading the palmerpenguins library and checking the structure of the penguin data.
+library(palmerpenguins)
+peng_df <- penguins
+str(peng_df)
+```
+
+2B. Determine if each column is discrete or continuous 
+
+species = discrete,
+island = discrete,
+bill_length_mm = continuous,
+bill_depth_mm = continuous,
+flipper_length_mm = continuous,
+body_mass_g = continuous,
+sex = discrete,
+year = discrete.
+
+2C. Test the hypothesis that flipper length differs between male and female penguins and run the summary function.
+
+```{r statstics_flipper}
+#running an ANOVA test and summary to determine if the hypothesis is supported.
+peng_anova <- aov(flipper_length_mm ~ sex, data = peng_df)
+summary(peng_anova)
+```
+
+The hypothesis that flipper length differs between male and female penguins is supported. This is known because there are three asterisk symbols next to the sex row in the summary table showing that the value is less than 0.05. When the P value is less than 0.05, the results are significant, so these results are significant. According to the significance codes, this comparison is significant, because the smaller the P value is, the more asterisks are present. The hypothesis that flipper length differs between male and female penguins is supported. 
+
+2D. Test the hypothesis that penguins with a higher body mass have longer flippers. 
+
+```{r statistics_mass_flipper}
+#running a regression test and summary to determine if the hypothesis is supported.
+peng_regression <- lm(flipper_length_mm ~ body_mass_g, data = peng_df)
+summary (peng_regression)
+```
+
+The hypothesis that penguins with a higher body mass have longer flippers is supported. This is known because there are three asterisks next to the body mass row which symbolizes that the T (or P) value is small enough that the results are significant (less than 0.05). This means that the hypothesis that penguins with a higher body mass have longer flippers is supported. 
+
+
+
+
+
