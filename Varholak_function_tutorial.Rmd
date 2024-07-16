@@ -1,0 +1,131 @@
+---
+title: "Varholak_function_tutorial"
+output: html_document
+date: "2024-07-16"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **stringr::str_count**
+
+str_count is a function that exists in the stringr package. This function is used to return the amount of times a specific pattern occurs within a string (either a word or concatenated vector of words).
+
+### <u>The arguments for this function are: </u>
+
+- A *string* argument which is any word or text whose class is **character**.
+- A *pattern* argument, whose class is **character**, that describes what pattern the count function is supposed to identify. 
+
+### <u>Examples</u>
+
+To use the str_count function, first install the stringr package. 
+
+```{r install_load_stringr}
+#install the stringr package and load its library. 
+#install.packages('stringr')
+library(stringr)
+```
+
+After loading the stringr package, namespace the str_count function and insert arguments. If the string argument is 'Stonehill' and the pattern is 'l' the str_count function will count how many times 'l' appears in the string. 
+
+```{r stringr_demo1}
+#demonstration of object assigned to the output of stringr::str_count where 'l' in Stonehill is counted.
+my_svar1 <- stringr::str_count(string = "Stonehill", pattern ='l')
+my_svar1
+```
+
+Additionally, the str_count function can be done on a concatenated vector. The example below has an object containing a vector of multiple words which is used as the string input for the str_count function to count the number of 'l's in each word. 
+
+```{r stringr_demo2}
+#demonstrating the function where the string argument is a concatenated vector and it counts how many times 'l' is in each word in the vector 
+my_vec <- c('Stonehill', 'College', 'Skyhawks')
+my_svar2 <- stringr::str_count (string= my_vec, pattern = 'l')
+my_svar2
+```
+
+The patterns can also be concatenated. It is important to remember that R is case specific, so the capitalization of certain letters matters when determining if the pattern occurs in the string.  
+
+```{r stringr_demo3}
+#demonstrating the pattern argument as a concatenated vector. The return displays how many times 'l', 'S', and 's' occur in the word Stonehill. 
+my_svar3 <- stringr::str_count (string = "Stonehill", pattern = c('l', 'S', 's'))
+my_svar3
+```
+
+# **mlbstats::iso**
+
+Within the mlbstats package, there is a function called mlbstats::iso which calculates a batter's isolated power. The isolated power is a statistic based on how many extra base hits a batter has when they get a hit. Isolated power has a maximum value of 3.000. This statistic is useful to know how powerful a specific batter is and how often they achieve extra base hits. 
+
+### <u> The arguments for this function are: </u>
+
+- *b1* - the **number** of singles a batter hits. 
+- *b2* - the **number** of doubles a batter hits. 
+- *b3* - the **number** of triples the batter hits. 
+- *hr* - the **number** of home runs a batter hits. 
+- *ab* - the **number** of at bats the previous arguments are taken over. 
+- *h* - the **number** of hits the batter gets in the specified amount of at bats. 
+
+Note that these arguments can be from a single game, a series, a season, or multiple seasons. The duration is specified in the argument ab (at bats). 
+
+### <u>Example</u>
+
+The first step to using this function is installing the mlbstats package and loading its library. 
+
+```{r iso_demo1}
+#install and load the mlbstats package and library
+#install.packages ('mlbstats')
+library (mlbstats)
+```
+
+The next step is to fill in the arguments. It will be helpful to assign the output to an object so that it can be revisited in future code chunks for analysis. (This data has been made up for the purpose of this tutorial). 
+
+```{r iso_demo2}
+#insert the appropriate arguments setting the output of the iso function to be an object. 
+iso_object <- mlbstats::iso(b1=30, b2=15, b3=4, hr=12, ab=75,h=61)
+iso_object
+```
+
+# **mlbstats::aera**
+
+The mlbstats package contains a function called aera, which calculates the adjusted earned run average for a baseball pitcher. The adjusted ERA is different from the regular ERA because it takes into account the league average ERA as well as different park statistics. 
+
+Note: This function can be used for numbers over an entire season, or over a select amount of time, but there should be at least one home and one away game recorded. 
+
+### <u>The arguments for this function are: </u> 
+
+- *er* - the **number** of earned runs (these are not scored due to errors in the field or wild pitches).
+- *ip* - the **number** of innings pitched by the pitcher. 
+- *lera* - the **number** representing the average earned run average for the entire league. 
+- *home_rs* - the **number** of runs scored at the home park by the pitcher's team. 
+- *home_ra* - the **number** of runs scored by the visiting team at the pitcher's home field. 
+- *home_r* - the total **number** of all runs scored at the pitcher's home park during a game or series. 
+- *road_rs* - the **number** of runs scored by the pitcher's team at an away stadium. 
+- *road_ra* - the **number** of runs scored by the home team at their home stadium (not the pitcher's team). 
+- *road_r* -  the **number** of runs scored by both teams at the away stadium. 
+
+### <u>Example</u>
+
+The first step is to install the mlbstats package and load the mlbstats library. 
+
+```{r mlb_stats}
+#install and load the mlbstats package and library
+#install.packages('mlbstats')
+library(mlbstats)
+```
+
+The next step is to fill in specific numbers for each argument to calculate the adjusted earned run average. This value can be assigned to an object to use at a later point. (The data in the code chunk below has been made up for this tutorial). 
+```{r mlb_aera}
+#insert the appropriate arguments and assign the output of the aera function to an object.
+statistics_aera <- mlbstats::aera (er=14, ip=7, lera=3.5, home_rs=10, home_ra=4, home_r=14, road_rs=5, road_ra=9, road_r=14)
+statistics_aera
+```
+
+
+
+
+
+
+
+
+
+

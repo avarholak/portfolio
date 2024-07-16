@@ -1,0 +1,68 @@
+---
+title: "Varholak_week7"
+output: html_document
+date: "2024-07-11"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question 1
+
+1A. Make an object containing the number 35 and convert it to Celsius (C)
+```{r hw_7_q1A}
+#Make an object with the number 35. 
+object_f <- 35
+#Convert to celsius 
+object_c <-  (object_f - 32) * 5/9
+object_c
+```
+
+1B. Make a for loop to convert a vector of numbers from Fahrenheit(F) to Celsius (C). 
+
+``` {r hw_7_q1B}
+numbers_vec <- c(35, 45, 55, 65, 75, 85, 95)
+#for loop to convert vector values from F to C
+for (i in numbers_vec) {
+  object_c1 <- (i - 32) * 5/9
+  print(object_c1)
+}
+  
+```
+
+1C. Add a conditional where if the temperature in Celsius is less than or equal to 18 a message prints that includes the temperature in Fahrenheit and a note recommending bringing a jacket. 
+
+``` {r hw_7_q1C}
+numbers_vec <- c(35, 45, 55, 65, 75, 85, 95)
+#for loop to convert vector values from F to C with conditionals in if statments
+for (i in numbers_vec) {
+  object_c1 <- (i - 32) * 5/9
+  
+  if (object_c1 < 18 | object_c1 == 18) {
+    print (paste(object_c1, "degrees Celsius is", i, "degrees Fahrenheit, you should bring a jacket"))
+  }else  {
+      print(paste(object_c1, "degrees Celsius is", i, "degrees Fahrenheit, you do not need to bring a jacket"))
+  }
+}
+```
+
+1D. If the degrees (C) is less than or equal to 18, write a message about bringing a jacket. If the degrees (C) is in between 18 and 23 write a message saying that neither shorts nor a jacket are required. If degrees (C) is greater than or equal to 23, write a message recommending bringing shorts. 
+```{r hw_7_q1D}
+numbers_vec <- c(35, 45, 55, 65, 75, 85, 95)
+#for loop to convert vector values from F to C with an additional conditional using else if.
+for (i in numbers_vec) {
+  object_c1 <- (i - 32) * 5/9
+  
+  if (object_c1 < 18 | object_c1 == 18) {
+    print (paste(object_c1, "degrees Celsius is", i, "degrees Fahrenheit, you should bring a jacket"))}
+  else if (object_c1 > 18 & object_c1<23) {
+    print (paste(object_c1, "degrees Celsius is", i, "degrees Fahrenheit, neither shorts nor a jacket are needed"))
+  }
+  else  {
+      print(paste(object_c1, "degrees Celsius is", i, "degrees Fahrenheit, you should pack shorts"))
+  }
+}
+```
+
+
