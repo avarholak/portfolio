@@ -1,5 +1,5 @@
 # portfolio
-Repository of various assignments and projects for R for Biologists Class during the Summer of 2024. 
+Repository of various assignments and projects for Bio316 - R for Biologists 
 
 **Varholak_function_tutorial**
 
